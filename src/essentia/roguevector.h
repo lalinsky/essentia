@@ -56,8 +56,8 @@ class RogueVector : public std::vector<T> {
   void setSize(size_t size);
 
 #if defined(__GNUC__) && GCC_VERSION < 40200
-  pointer data();
-  const_pointer data() const;
+  T* data();
+  const T* data() const;
 #endif
 
 };
@@ -95,13 +95,13 @@ void RogueVector<T>::setSize(size_t size) {
 #if GCC_VERSION < 40200
 
 template <typename T>
-RogueVector<T>::pointer RogueVector<T>::data() {
-  return RogueVector<T>::pointer(this->_M_impl._M_start);
+T* RogueVector<T>::data() {
+  return this->_M_impl._M_start;
 }
 
 template <typename T>
-RogueVector<T>::const_pointer RogueVector<T>::data() const {
-  return RogueVector<T>::const_pointer(this->_M_impl._M_start);
+const T* RogueVector<T>::data() const {
+  return this->_M_impl._M_start;
 }
 
 #endif
