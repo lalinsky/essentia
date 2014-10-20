@@ -63,11 +63,6 @@ def configure(ctx):
     else:
         raise ValueError('mode should be either "debug" or "release"')
 
-    if ctx.env.DEST_OS != 'win32':
-        # required if we want to use libessentia.a to be linked in the python bindings
-        # (dynamic library, needs -fPIC)
-        ctx.env.CXXFLAGS += [ '-fPIC' ]
-
     # global defines
     ctx.env.DEFINES = []
 
@@ -87,6 +82,12 @@ def configure(ctx):
         ctx.env.CXXFLAGS += [ '-I/usr/local/include' ]
 
     ctx.load('compiler_cxx compiler_c')
+
+    if ctx.env.DEST_OS != 'win32':
+        # required if we want to use libessentia.a to be linked in the python bindings
+        # (dynamic library, needs -fPIC)
+        # all code is position independent on windows, so don't include it there
+        ctx.env.CXXFLAGS += [ '-fPIC' ]
 
     # write pkg-config file
     prefix = os.path.normpath(ctx.options.prefix)
