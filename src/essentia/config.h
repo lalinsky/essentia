@@ -125,13 +125,9 @@
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 #ifdef OS_WIN32
-
 // tell microsoft we would like to use std::min and std::max
 #undef NOMINMAX
 #define NOMINMAX 1
-
-typedef unsigned int uint;
-
 #endif // OS_WIN32
 
 // some MSVC peculiarities that need to be fixed
@@ -157,11 +153,6 @@ typedef unsigned int uint;
     }
   }
 #endif // OS_WIN32_MSVC
-
-
-#ifdef OS_MAC
-typedef unsigned int uint;
-#endif // OS_MAC
 
 
 // returns GCC version as a single constant, valid for both linux & mac
