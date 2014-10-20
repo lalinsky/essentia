@@ -63,11 +63,9 @@ def configure(ctx):
     else:
         raise ValueError('mode should be either "debug" or "release"')
 
-    if sys.platform != 'win32':
-        # required if we want to use libessentia.a to be linked in the python bindings
-        # (dynamic library, needs -fPIC)
-        # not needed on windows, because all code is position independant there
-        ctx.env.CXXFLAGS += [ '-fPIC' ]
+    # required if we want to use libessentia.a to be linked in the python bindings
+    # (dynamic library, needs -fPIC)
+    ctx.env.CXXFLAGS += [ '-fPIC' ]
 
     # global defines
     ctx.env.DEFINES = []
