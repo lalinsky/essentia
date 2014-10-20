@@ -66,21 +66,6 @@ def configure(ctx):
     # global defines
     ctx.env.DEFINES = []
 
-    if sys.platform == 'darwin':
-        # force the use of clang as compiler, we don't want gcc anymore on mac
-        ctx.env.CC = 'clang'
-        ctx.env.CXX = 'clang++'
-
-
-        ctx.env.DEFINES   += [ 'GTEST_HAS_TR1_TUPLE=0' ]
-        ctx.env.CXXFLAGS = [ '-stdlib=libc++', '-std=c++11', '-Wno-gnu' ]
-        ctx.env.LINKFLAGS = [ '-stdlib=libc++' ]
-        # for defining static const variables in header
-        ctx.env.CXXFLAGS += [ '-Wno-static-float-init' ]
-        # add /usr/local/include as the brew formula for yaml doesn't have
-        # the cflags properly set
-        ctx.env.CXXFLAGS += [ '-I/usr/local/include' ]
-
     ctx.load('compiler_cxx compiler_c')
 
     if ctx.env.DEST_OS != 'win32':
