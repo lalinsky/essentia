@@ -77,7 +77,7 @@ def configure(ctx):
 
     if ctx.env.WITH_STATIC_EXAMPLES:
         ctx.env.LINKFLAGS = ['-static']
-        ctx.env.SHLIB_MARKER = '-Wl,-Bstatic'
+        #ctx.env.SHLIB_MARKER = '-Wl,-Bstatic'
 
         # NOTE: this list of libs is hardcoded to work on a debian wheezy system
         #       with a custom-compiled version of ffmpeg, to reduce the number of
