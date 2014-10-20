@@ -54,6 +54,12 @@ class RogueVector : public std::vector<T> {
   // Those need to be implementation specific
   void setData(T* data);
   void setSize(size_t size);
+
+#if defined(__GNUC__) && GCC_VERSION <= 40200
+  pointer data();
+  const_pointer data() const;
+#endif
+
 };
 
 
@@ -86,9 +92,23 @@ void RogueVector<T>::setSize(size_t size) {
   this->_M_impl._M_end_of_storage = this->_M_impl._M_start + size;
 }
 
+#if GCC_VERSION < 40200
+
+template <typename T>
+RogueVector<T>::pointer RogueVector<T>::data() {
+  return pointer(this->_M_impl._M_start);
+}
+
+template <typename T>
+RogueVector<T>::const_pointer RogueVector<T>::data() const {
+  return const_pointer(this->_M_impl._M_start);
+}
+
+#endif
 
 // clang/libcpp implementation
 #elif defined (_LIBCPP_VERSION)
+
 
 // TODO: this is a big hack that relies on clang/libcpp not changing the memory
 //       layout of the std::vector (very dangerous, but works for now...)
