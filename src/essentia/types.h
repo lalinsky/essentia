@@ -36,18 +36,16 @@
 
 #ifdef _MSC_VER
 
-typedef unsigned __int16 uint16_t;
-typedef unsigned __int32 uint32_t;
-typedef unsigned __int64 uint64_t;
-typedef __int16 int16_t;
-typedef __int32 int32_t;
-typedef __int64 int64_t;
+typedef unsigned __int16 uint16;
+typedef unsigned __int32 uint32;
+typedef unsigned __int64 uint64;
+typedef __int16 sint16;
+typedef __int32 sint32;
+typedef __int64 sint64;
 
 #else
 
 #include <inttypes.h>
-
-#endif
 
 typedef uint16_t uint16;
 typedef uint32_t uint32;
@@ -55,6 +53,8 @@ typedef uint64_t uint64;
 typedef int16_t sint16;
 typedef int32_t sint32;
 typedef int64_t sint64;
+
+#endif
 
 
 typedef unsigned int uint;
