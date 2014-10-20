@@ -85,11 +85,11 @@ class Atomic {
   inline operator int() const { return i_; }
 
   inline void operator-=(const int &i) {
-    OSAtomicAdd32Barrier(&i_, -i);
+    OSAtomicAdd32Barrier(-i, &i_);
   }
 
   inline void operator+=(const int &i) {
-    OSAtomicAdd32Barrier(&i_, i);
+    OSAtomicAdd32Barrier(i, &i_);
   }
 
   inline void operator++() {
