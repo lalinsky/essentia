@@ -124,9 +124,14 @@
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
-// tell microsoft we would like to use std::min and std::max
 #ifdef OS_WIN32
-#  define NOMINMAX
+
+// tell microsoft we would like to use std::min and std::max
+#undef NOMINMAX
+#define NOMINMAX 1
+
+typedef unsigned int uint;
+
 #endif // OS_WIN32
 
 // some MSVC peculiarities that need to be fixed
@@ -136,8 +141,6 @@
   #pragma warning (disable : 4996) // XYZ was declared deprecated
   #pragma warning (disable : 4146) // MersenneTwister.h:273 unary minus operator applied to unsigned type, result still unsigned
   #pragma warning (disable : 4355) // this used in class initialization, but we do it in a safe way
-
-  typedef unsigned int uint;
 
   #define strcasecmp _stricmp
 
