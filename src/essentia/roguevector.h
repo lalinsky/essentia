@@ -59,8 +59,8 @@ class RogueVector : public std::vector<T> {
 
 
 
-// Windows implementation
-#if defined(OS_WIN32)
+// MSVC implementation
+#if defined(_MSV_VER)
 
 
 template <typename T>
@@ -73,8 +73,8 @@ void RogueVector<T>::setSize(size_t size) {
 }
 
 
-// Linux implementation
-#elif defined(OS_LINUX)
+// GCC implementation
+#elif defined(__GNUC__)
 
 
 template <typename T>
@@ -87,8 +87,8 @@ void RogueVector<T>::setSize(size_t size) {
 }
 
 
-// Mac implementation
-#elif defined (OS_MAC)
+// clang/libcpp implementation
+#elif defined (_LIBCPP_VERSION)
 
 // TODO: this is a big hack that relies on clang/libcpp not changing the memory
 //       layout of the std::vector (very dangerous, but works for now...)
@@ -103,6 +103,10 @@ void RogueVector<T>::setSize(size_t size) {
     *(start+2) = *start + size;
 }
 
+
+#else
+
+#error "unsupported STL vendor"
 
 #endif
 
