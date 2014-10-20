@@ -20,8 +20,6 @@
 #ifndef ESSENTIA_STREAMING_RINGBUFFERIMPL_H
 #define ESSENTIA_STREAMING_RINGBUFFERIMPL_H
 
-#include "atomic.h"
-
 #ifdef OS_WIN32
 
 #include <windows.h>
@@ -99,6 +97,9 @@ class Condition {
 
 
 #endif // OS_WIN32
+
+
+#include "atomic.h"
 
 
 namespace essentia {
